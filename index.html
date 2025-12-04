@@ -32,26 +32,21 @@
         @keyframes dot{0%,20%{content:' .'}40%{content:' ..'}60%{content:' ...'}80%,100%{content:' .'}}
     </style>
 </head>
+
 <body>
 <div class="c">
     <div class="h"><h1>2025年「有限口語自閉症者國際研討會<br>—共融、共創、共進」報名表</h1></div>
-    <div class="i">
-        <strong>【研討會簡介】</strong><br>
-        本研討會聚焦「有限口語自閉症者」的溝通權利與支持，邀請美國與台灣跨域專家，從腦科學、臨床實務、教育政策到社區生活模式，探討如何以 ECTA（擴大性溝通治療）與 AAC（輔助與替代性溝通）為基礎，建立具可溝通性、多元融合的社區支持體系。<br><br>
-        日期：2025年12月20日（六）－21日（日）　｜　地點：新北市政府大樓511會議室（99席）<br>
-        主辦：財團法人慈暉社會福利基金會 × 中華希隱力健康生活協會
-    </div>
 
     <form id="seminarForm">
         <input type="hidden" id="timestamp">
 
-        <label>姓名 <span style="color:var(--pink)">*</span></label>
+        <label>姓名 *</label>
         <input type="text" id="name" required>
 
-        <label>電子信箱 <span style="color:var(--pink)">*</span></label>
+        <label>電子信箱 *</label>
         <input type="email" id="email" required>
 
-        <label>行動電話號碼 <span style="color:var(--pink)">*</span></label>
+        <label>行動電話號碼 *</label>
         <input type="tel" id="phone" required>
 
         <label>服務單位／就讀學校</label>
@@ -60,7 +55,7 @@
         <label>職稱／身份</label>
         <input type="text" id="title">
 
-        <label>您預計參加場次 <span style="color:var(--pink)">*</span></label>
+        <label>您預計參加場次 *</label>
         <select id="session" required>
             <option value="">請選擇</option>
             <option value="12月20日（六）">12月20日（六）</option>
@@ -68,21 +63,11 @@
             <option value="兩天皆參加">兩天皆參加</option>
         </select>
 
-        <label>是否用餐 <span style="color:var(--pink)">*</span></label>
-        <select id="meal" required>
-            <option value="">請選擇</option>
-            <option value="素食">用餐（素食）</option>
-            <option value="不用餐">不用餐</option>
-        </select>
+        <label>您是否需要特殊協助或無障礙服務？ *</label>
+        <textarea id="assist" required placeholder="如：輪椅席位、手語翻譯。若無請填「無」"></textarea>
 
-        <label>您是否需要特殊協助或無障礙服務？ <span style="color:var(--pink)">*</span></label>
-        <textarea id="assist" required placeholder="如輪椅席位、手語翻譯、AAC設備等。若無需求請填「無」"></textarea>
-
-        <label>午餐調查 <span style="color:var(--pink)">*</span></label>
-        <select id="diet" required onchange="
-            document.getElementById('dietDetails').style.display = 
-            this.value === '有過敏或特殊飲食需求' ? 'block' : 'none';
-        ">
+        <label>午餐調查 *</label>
+        <select id="diet" required onchange="document.getElementById('dietDetails').style.display=this.value==='有過敏或特殊飲食需求'?'block':'none'">
             <option value="">請選擇</option>
             <option value="無特殊需求">無特殊需求</option>
             <option value="有過敏或特殊飲食需求">有過敏或特殊飲食需求</option>
@@ -92,100 +77,83 @@
             <input type="text" id="dietDetail" placeholder="請說明過敏原或飲食限制">
         </div>
 
+        <label>參加場次 - 用餐素食</label>
+        <input type="text" id="mealVegetarian" placeholder="若無請留空">
+
+        <label>參加場次 - 不用餐</label>
+        <input type="text" id="mealNo" placeholder="若無請留空">
+
         <div class="agree-box">
-            <label for="agree">
-                <input type="checkbox" id="agree" required>
-                <span><strong>報名確認 <span style="color:var(--pink)">*</span></strong><br>
-                我確認以上資訊正確，並同意報名本活動。</span>
+            <label>
+                <input type="checkbox" id="confirm" required>
+                <span><strong>報名確認 *</strong><br>我確認以上資訊正確並願意報名此活動。</span>
             </label>
         </div>
 
         <button type="submit" id="btn">送出報名</button>
 
-        <div id="ok" class="ok">報名成功！感謝您的參與，我們會盡快寄送確認信給您</div>
-        <div id="error" class="error">送出失敗，請稍後再試或聯繫主辦單位</div>
+        <div id="ok" class="ok">報名成功！感謝您的參與。</div>
+        <div id="error" class="error">送出失敗，請稍後再試。</div>
     </form>
 </div>
 
 <script>
-    // ⭐⭐⭐ 請換成你最新部署的 Apps Script Web App URL
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLKJUAc1pfQ3GLj8bJZ2Gsw6SkeHjkWUO7nRhx6LB6Tw0BNJNFCxLMLWcBUhtcskA/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_LpPTvuRysA2wzv4J4V5YFG7Zi91AcGlqWBwSoRk_wz3YEsj30p6iFVeaihVeEx60hA/exec";
 
-    const form = document.getElementById('seminarForm');
-    const btn = document.getElementById('btn');
-    const ok = document.getElementById('ok');
-    const errorDiv = document.getElementById('error');
-    const agree = document.getElementById('agree');
+// 啟用按鈕樣式
+document.getElementById("confirm").addEventListener("change", e => {
+    const btn = document.getElementById("btn");
+    if (e.target.checked) btn.classList.add("active");
+    else btn.classList.remove("active");
+});
 
-    agree.onchange = () => {
-        if (agree.checked) { btn.classList.add('active'); btn.textContent = '立即送出報名'; }
-        else { btn.classList.remove('active'); btn.textContent = '送出報名'; }
-    };
+//送出表單
+document.getElementById("seminarForm").addEventListener("submit", async e => {
+    e.preventDefault();
 
-    form.addEventListener('submit', async e => {
-        e.preventDefault();
-        if (!btn.classList.contains('active')) return;
+    const btn = document.getElementById("btn");
+    btn.classList.add("loading");
+    btn.textContent = "傳送中...";
 
-        ok.style.display = errorDiv.style.display = 'none';
-        btn.classList.add('loading');
-        btn.textContent = '傳送中…';
+    // 時間戳記
+    document.getElementById("timestamp").value =
+        new Date().toLocaleString("zh-TW", { timeZone: "Asia/Taipei" });
 
-        // 時間戳記
-        const timestamp = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+    // 建立 FormData（避免 CORS）
+    const fd = new FormData();
+    const fields = [
+        "timestamp","name","email","phone","unit","title","session",
+        "assist","diet","dietDetail","mealVegetarian","mealNo","confirm"
+    ];
 
-        // 依照試算表欄位建立完整資料對應
-        const data = {
-            timestamp,
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            unit: document.getElementById('unit').value.trim(),
-            session: document.getElementById('session').value,
-            mealVegetarian: document.getElementById('meal').value === '素食' ? '是' : '',
-            mealNo: document.getElementById('meal').value === '不用餐' ? '是' : '',
-            title: document.getElementById('title').value.trim(),
-            assist: document.getElementById('assist').value.trim(),
-            diet: document.getElementById('diet').value,
-            dietDetail:
-                document.getElementById('diet').value === '有過敏或特殊飲食需求'
-                    ? (document.getElementById('dietDetail').value.trim() || '未填寫')
-                    : '無',
-            confirm: document.getElementById('agree').checked ? "同意" : "未同意"
-        };
-
-        try {
-            const fd = new FormData();
-                 for (const key in data) {
-                 fd.append(key, data[key]);
-                }
-
-            const res = await fetch(SCRIPT_URL, {
-                        method: "POST",
-                        body: fd   // ❗ 不要任何 headers
-                       });
-
-            });
-
-            const result = await res.json();
-
-            if (res.ok && result.status === 'success') {
-                ok.style.display = 'block';
-                form.reset();
-                document.getElementById('dietDetails').style.display = 'none';
-                btn.classList.remove('active','loading');
-                btn.textContent = '送出報名';
-                setTimeout(() => ok.style.display = 'none', 9000);
-            } else {
-                throw new Error(result.message || '未知錯誤');
-            }
-        } catch (err) {
-            console.error(err);
-            errorDiv.textContent = '送出失敗：' + (err.message || '請檢查網路或重新部署 Web App');
-            errorDiv.style.display = 'block';
-            btn.classList.remove('loading');
-            btn.textContent = '立即送出報名';
-        }
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        fd.append(id, el?.value || "");
     });
+
+    try {
+        const res = await fetch(SCRIPT_URL, {
+            method: "POST",
+            body: fd   // ❗ 無 headers → 不會觸發預檢 → 不會觸發 CORS
+        });
+
+        const json = await res.json();
+
+        if (json.status === "success") {
+            document.getElementById("ok").style.display = "block";
+            document.getElementById("seminarForm").reset();
+            document.getElementById("dietDetails").style.display = "none";
+        } else {
+            document.getElementById("error").style.display = "block";
+        }
+    } catch (err) {
+        console.error(err);
+        document.getElementById("error").style.display = "block";
+    }
+
+    btn.classList.remove("loading");
+    btn.textContent = "送出報名";
+});
 </script>
 
 </body>
