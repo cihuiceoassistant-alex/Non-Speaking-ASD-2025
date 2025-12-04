@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年有限口語自閉症者國際研討會報名</title>
+    <style>
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#f5f8fc;padding:20px;margin:0;line-height:1.7;color:#333}
+        .c{max-width:720px;margin:0 auto;background:white;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12)}
+        .h{background:linear-gradient(135deg,#4a90e2,#357abd);color:white;padding:35px 24px;text-align:center}
+        .h h1{font-size:24px;line-height:1.4;font-weight:600;margin:0}
+        .i{padding:30px;background:#eef5ff;line-height:1.8;font-size:16px;color:#2c3e50}
+        .i strong{color:#2c5aa0}
+        label{display:block;margin:24px 0 8px;font-weight:600;color:#2c3e50;font-size:15.5px}
+        input,select,textarea{width:100%;padding:14px 16px;border:1.5px solid #d8dee5;border-radius:12px;font-size:16px;box-sizing:border-box;transition:all .2s}
+        input:focus,select:focus,textarea:focus{border-color:#4a90e2;outline:none;box-shadow:0 0 0 4px rgba(74,144,226,.15)}
+        select{height:52px}
+        textarea{height:110px;resize:vertical}
+        .chk{display:flex;gap:12px;margin:28px 0;align-items:flex-start}
+        .chk input{margin-top:3px}
+        button{width:100%;padding:18px;background:#95a5a6;color:white;border:none;border-radius:16px;font-size:18px;font-weight:bold;cursor:not-allowed;margin-top:10px}
+        button.active{background:#4a90e2;cursor:pointer}
+        button.active:hover{background:#357abd}
+        #dietDetails{display:none;margin-top:12px}
+        .ok{margin:25px;padding:22px;background:#edfbf8;border:2px solid #a8e6cf;border-radius:16px;text-align:center;color:#16a085;font-size:17px;font-weight:bold;display:none}
+    </style>
+</head>
+<body>
+
+<div class="c">
+    <div class="h"><h1>2025年「有限口語自閉症者國際研討會<br>—共融、共創、共進」報名表</h1></div>
+    
+    <div class="i">
+        <strong>【研討會簡介】</strong><br>
+        本研討會聚焦「有限口語自閉症者」的溝通權利與支持，邀請美國與台灣跨域專家，從腦科學、臨床實務、教育政策到社區生活模式，探討如何以 ECTA（擴大性溝通治療）與 AAC（輔助與替代性溝通）為基礎，建立具可溝通性、多元融合的社區支持體系。<br><br>
+        日期：2025年12月20日（六）－21日（日）　｜　地點：新北市政府大樓511會議室（99席）<br>
+        主辦：財團法人慈暉社會福利基金會 × 中華吸引力健康生活協會
+    </div>
+
+    <form id="f">
+        <label>姓名 <span style="color:#e74c3c">*</span></label>
+        <input type="text" name="name" required>
+
+        <label>電子信箱 <span style="color:#e74c3c">*</span></label>
+        <input type="email" name="email" required>
+
+        <label>行動電話號碼 <span style="color:#e74c3c">*</span></label>
+        <input type="tel" name="phone" required>
+
+        <label>服務單位／就讀學校</label>
+        <input type="text" name="org">
+
+        <label>職稱／身份</label>
+        <input type="text" name="title">
+
+        <label>您預計參加場次 <span style="color:#e74c3c">*</span></label>
+        <select name="session" required>
+            <option value="">請選擇</option>
+            <option value="12月20日（六）">12月20日（六）</option>
+            <option value="12月21日（日）">12月21日（日）</option>
+            <option value="兩天皆參加">兩天皆參加</option>
+        </select>
+
+        <label>您是否需要特殊協助或無障礙服務？ <span style="color:#e74c3c">*</span></label>
+        <textarea name="assist" required placeholder="如輪椅席位、手語翻譯、AAC設備等。若無需求請填「無」"></textarea>
+
+        <label>午餐調查 <span style="color:#e74c3c">*</span></label>
+        <select name="lunch" required onchange="document.getElementById('dietDetails').style.display=this.value==='有過敏或特殊飲食需求'?'block':'none'">
+            <option value="">請選擇</option>
+            <option value="無特殊需求">無特殊需求</option>
+            <option value="有過敏或特殊飲食需求">有過敏或特殊飲食需求</option>
+        </select>
+
+        <div id="dietDetails">
+            <input type="text" name="diet" placeholder="請說明過敏原或飲食限制（如堅果、海鮮、素食等）">
+        </div>
+
+        <div class="chk">
+            <input type="checkbox" id="a" required onchange="document.getElementById('b').classList.toggle('active',this.checked);document.getElementById('b').textContent=this.checked?'立即送出報名':'送出報名'">
+            <label for="a"><strong>報名確認 <span style="color:#e74c3c">*</span></strong><br>我確認以上資訊正確，並同意報名本活動。</label>
+        </div>
+
+        <button type="submit" id="b">送出報名</button>
+    </form>
+
+    <div id="ok" class="ok">報名成功！資料已寫入試算表，我們會盡快寄送確認信給您</div>
+</div>
+
+<!-- 請把下面這行換成您自己的 Apps Script Web App URL -->
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyBU5daTRiKTkmq2dH6DvcIV7Ek-Y1jP1KiK6EFGyxL9NyrlTo8ys4eKLm5n2M2MB_ew/exec';
+
+document.getElementById('f').onsubmit = async function(e){
+    e.preventDefault();
+    if(!document.getElementById('a').checked) return alert('請勾選報名確認');
+
+    const fd = new FormData(this);
+    const data = {
+        name: fd.get('name'),
+        email: fd.get('email'),
+        phone: fd.get('phone'),
+        org: fd.get('org')||'',
+        title: fd.get('title')||'',
+        session: fd.get('session'),
+        assist: fd.get('assist'),
+        lunch: fd.get('lunch'),
+        diet: fd.get('diet')||'',
+    };
+
+    // 為了對應您試算表真正的欄位順序（包含隱藏欄位）
+    const row = [
+        new Date(),                             // 時間戳記
+        data.name,                              // 姓名
+        data.email,                             // 電子信箱
+        data.phone,                             // 行動電話號碼
+        data.org,                               // 服務單位/就讀學校
+        data.session,                           // 您預計參加場次
+        '',                                     // 參加場次 [用餐素食] → 留空
+        '',                                     // 參加場次 [不用餐] → 留空
+        data.title,                             // 職稱 / 身份
+        data.assist,                            // 您是否需要特殊協助或無障礙服務？
+        data.lunch,                             // 午餐調查
+        data.diet,                              // 是否有特殊飲食需求或過敏？
+        '同意'                                  // 報名確認
+    ];
+
+    try {
+        const resp = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({values: [row]}),
+            headers: {'Content-Type':'application/json'}
+        });
+        if(resp.ok){
+            document.getElementById('ok').style.display='block';
+            this.reset();
+            document.getElementById('dietDetails').style.display='none';
+            document.getElementById('b').classList.remove('active');
+            document.getElementById('b').textContent='送出報名';
+        }else alert('送出失敗，請再試一次');
+    }catch(err){alert('網路錯誤')}
+};
+</script>
+
+</body>
+</html>
